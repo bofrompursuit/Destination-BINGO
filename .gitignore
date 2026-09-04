@@ -21,3 +21,4 @@ logs/
 
 # macOS AppleDouble files (ExFAT drive)
 ._*
+.vercel
