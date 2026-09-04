@@ -1440,14 +1440,14 @@ export default function App() {
       {/* ── Header ── */}
       <div className="w-full pt-7 pb-3 px-4">
         {/* Top row: audio + tier badge */}
-        <div className="grid items-center mb-3" style={{ gridTemplateColumns:'1fr auto 1fr' }}>
+        <div className="flex items-center justify-between mb-1">
           {/* Audio toggle */}
           <button
             onClick={()=>setAudioEnabled(v=>!v)}
             className="w-9 h-9 rounded-full flex items-center justify-center active:scale-90 transition-transform"
             style={isVIP
-              ? { justifySelf:'start', background:'rgba(212,175,55,0.12)',border:'1px solid rgba(212,175,55,0.3)',backdropFilter:'blur(8px)' }
-              : { justifySelf:'start', background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.15)',backdropFilter:'blur(8px)' }}
+              ? { background:'rgba(212,175,55,0.12)',border:'1px solid rgba(212,175,55,0.3)',backdropFilter:'blur(8px)' }
+              : { background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.15)',backdropFilter:'blur(8px)' }}
             title={audioEnabled?'Mute ambient':'Play ambient music'}
           >
             {audioEnabled ? (
@@ -1465,34 +1465,11 @@ export default function App() {
             )}
           </button>
 
-          {/* Title */}
-          <div className="flex items-center justify-center" style={{ justifySelf:'center' }}>
-            <svg width="200" height="64" viewBox="0 0 200 64" style={{ overflow:'visible' }}>
-              <defs>
-                <path id="nycTitleArc" d="M 8 50 Q 100 -4 192 50" fill="none"/>
-              </defs>
-              <text
-                style={{
-                  fontFamily: "'Passion One', cursive",
-                  fontWeight: 900,
-                  fontSize: 26,
-                  fill: '#006BB6',
-                  stroke: '#F58426',
-                  strokeWidth: 2.5,
-                  paintOrder: 'stroke',
-                  letterSpacing: '1px',
-                } as CSSProperties}
-              >
-                <textPath href="#nycTitleArc" startOffset="50%" textAnchor="middle">NYC BINGO</textPath>
-              </text>
-            </svg>
-          </div>
-
           {/* Tier badge */}
           {isVIP ? (
             <button onClick={()=>setShowVIPModal(true)}
               className="relative flex items-center gap-1 px-2.5 py-1.5 rounded-full active:scale-90 transition-transform overflow-hidden"
-              style={{ justifySelf:'end', background:'linear-gradient(135deg,#1A1628,#0D0B18)',
+              style={{ background:'linear-gradient(135deg,#1A1628,#0D0B18)',
                        border:'1px solid rgba(212,175,55,0.5)',
                        boxShadow:'0 2px 16px rgba(212,175,55,0.25)' }}>
                             <span className="crown-pulse relative text-sm leading-none">👑</span>
@@ -1506,11 +1483,34 @@ export default function App() {
           ) : (
             <button onClick={()=>setShowVIPModal(true)}
               className="flex items-center gap-1 px-2.5 py-1.5 rounded-full font-black text-[11px] active:scale-90 transition-transform"
-              style={{ justifySelf:'end', background:'linear-gradient(90deg,#FF2D78,#8B5CF6)',color:'white',
+              style={{ background:'linear-gradient(90deg,#FF2D78,#8B5CF6)',color:'white',
                        boxShadow:'0 2px 12px rgba(255,45,120,0.45)' }}>
               <span>✨</span><span>Go VIP</span>
             </button>
           )}
+        </div>
+
+        {/* Title — big arched wordmark, scales to fill the width */}
+        <div className="w-full flex justify-center mb-1">
+          <svg viewBox="0 0 200 64" style={{ width:'94%', maxWidth:440, height:'auto', overflow:'visible' }}>
+            <defs>
+              <path id="nycTitleArc" d="M 8 50 Q 100 -4 192 50" fill="none"/>
+            </defs>
+            <text
+              style={{
+                fontFamily: "'Passion One', cursive",
+                fontWeight: 900,
+                fontSize: 26,
+                fill: '#006BB6',
+                stroke: '#F58426',
+                strokeWidth: 2.5,
+                paintOrder: 'stroke',
+                letterSpacing: '1px',
+              } as CSSProperties}
+            >
+              <textPath href="#nycTitleArc" startOffset="50%" textAnchor="middle">NYC BINGO</textPath>
+            </text>
+          </svg>
         </div>
 
         {/* Subtitle — tier-aware */}
