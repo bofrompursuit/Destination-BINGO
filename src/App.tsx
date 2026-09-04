@@ -66,7 +66,7 @@ const AFFIRMATIONS = [
   { text: 'ICONIC BEHAVIOR!',     emoji: '🌈' },
   { text: 'MAIN CHARACTER!',      emoji: '🌟' },
   { text: 'WE LOVE TO SEE IT!',   emoji: '😍' },
-  { text: 'NEW YORK CITY ROYALTY!', emoji: '🗽' },
+  { text: 'NYC ROYALTY!', emoji: '🗽' },
   { text: 'SLAYING ACCORDINGLY!', emoji: '🔱' },
 ]
 
@@ -163,9 +163,9 @@ async function exportHDCard(
 
   // Title
   ctx.textAlign = 'center'
-  ctx.fillStyle = '#FF2D78'
-  ctx.font = 'bold 72px sans-serif'
-  ctx.fillText('🗽 NEW YORK CITY BINGO 🗽', W / 2, 110)
+  ctx.fillStyle = '#F58426'
+  ctx.font = '72px Anton, sans-serif'
+  ctx.fillText('🗽 NYC BINGO 🗽', W / 2, 110)
   ctx.fillStyle = 'rgba(255,255,255,0.55)'
   ctx.font = '38px sans-serif'
   ctx.fillText(`${completedCount} / 24 challenges completed`, W / 2, 165)
@@ -1440,14 +1440,14 @@ export default function App() {
       {/* ── Header ── */}
       <div className="w-full pt-7 pb-3 px-4">
         {/* Top row: audio + tier badge */}
-        <div className="flex items-center justify-between mb-3">
+        <div className="grid items-center mb-3" style={{ gridTemplateColumns:'1fr auto 1fr' }}>
           {/* Audio toggle */}
           <button
             onClick={()=>setAudioEnabled(v=>!v)}
             className="w-9 h-9 rounded-full flex items-center justify-center active:scale-90 transition-transform"
             style={isVIP
-              ? { background:'rgba(212,175,55,0.12)',border:'1px solid rgba(212,175,55,0.3)',backdropFilter:'blur(8px)' }
-              : { background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.15)',backdropFilter:'blur(8px)' }}
+              ? { justifySelf:'start', background:'rgba(212,175,55,0.12)',border:'1px solid rgba(212,175,55,0.3)',backdropFilter:'blur(8px)' }
+              : { justifySelf:'start', background:'rgba(255,255,255,0.1)',border:'1px solid rgba(255,255,255,0.15)',backdropFilter:'blur(8px)' }}
             title={audioEnabled?'Mute ambient':'Play ambient music'}
           >
             {audioEnabled ? (
@@ -1466,20 +1466,33 @@ export default function App() {
           </button>
 
           {/* Title */}
-          <div className="flex items-center gap-2">
-            <span className="text-[20px] animate-float">🗽</span>
-            <h1 className={`text-[24px] font-black leading-none ${isVIP?'vip-shimmer-text':'shimmer-text'}`}
-              style={{ fontFamily:'Pacifico,cursive' }}>
-              New York City Bingo
-            </h1>
-            <span className="text-[20px] animate-float-delayed">🚕</span>
+          <div className="flex items-center justify-center" style={{ justifySelf:'center' }}>
+            <svg width="200" height="64" viewBox="0 0 200 64" style={{ overflow:'visible' }}>
+              <defs>
+                <path id="nycTitleArc" d="M 8 50 Q 100 -4 192 50" fill="none"/>
+              </defs>
+              <text
+                style={{
+                  fontFamily: "'Passion One', cursive",
+                  fontWeight: 900,
+                  fontSize: 26,
+                  fill: '#006BB6',
+                  stroke: '#F58426',
+                  strokeWidth: 2.5,
+                  paintOrder: 'stroke',
+                  letterSpacing: '1px',
+                } as CSSProperties}
+              >
+                <textPath href="#nycTitleArc" startOffset="50%" textAnchor="middle">NYC BINGO</textPath>
+              </text>
+            </svg>
           </div>
 
           {/* Tier badge */}
           {isVIP ? (
             <button onClick={()=>setShowVIPModal(true)}
               className="relative flex items-center gap-1 px-2.5 py-1.5 rounded-full active:scale-90 transition-transform overflow-hidden"
-              style={{ background:'linear-gradient(135deg,#1A1628,#0D0B18)',
+              style={{ justifySelf:'end', background:'linear-gradient(135deg,#1A1628,#0D0B18)',
                        border:'1px solid rgba(212,175,55,0.5)',
                        boxShadow:'0 2px 16px rgba(212,175,55,0.25)' }}>
                             <span className="crown-pulse relative text-sm leading-none">👑</span>
@@ -1493,7 +1506,7 @@ export default function App() {
           ) : (
             <button onClick={()=>setShowVIPModal(true)}
               className="flex items-center gap-1 px-2.5 py-1.5 rounded-full font-black text-[11px] active:scale-90 transition-transform"
-              style={{ background:'linear-gradient(90deg,#FF2D78,#8B5CF6)',color:'white',
+              style={{ justifySelf:'end', background:'linear-gradient(90deg,#FF2D78,#8B5CF6)',color:'white',
                        boxShadow:'0 2px 12px rgba(255,45,120,0.45)' }}>
               <span>✨</span><span>Go VIP</span>
             </button>
@@ -1503,7 +1516,7 @@ export default function App() {
         {/* Subtitle — tier-aware */}
         <div className="flex items-center justify-center gap-2 mb-1">
           <p className="text-[13px] font-semibold tracking-wide text-center" style={{ color:subtitleColor }}>
-            {isVIP ? 'Your exclusive VIP board — customize & collect ✦' : 'How many can you check off? 🗽'}
+            {isVIP ? 'Your exclusive VIP board — customize & collect ✦' : 'How many can you check off?'}
           </p>
         </div>
 
