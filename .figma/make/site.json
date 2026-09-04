@@ -1,0 +1,10 @@
+{
+  "description": "Engage in a vibrant Fire Island-themed Bingo game by completing photo challenges, tracking progress, and sharing your summer adventure moments easily.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
